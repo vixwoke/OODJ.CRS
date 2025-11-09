@@ -109,6 +109,6 @@ This project follows a **Git-based workflow**:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/username/CourseRecoverySystem.git
+   git clone https://github.com/vixwoke/OODJ.CRS.git
 
-#Yes this readme file was created with ChatGPT. You know I don't want to spend time to create this don't you?
+## Yes this readme file was created with ChatGPT. You know I don't want to spend time to create this don't you?
