@@ -9,14 +9,14 @@ package crsAppPackage;
  *
  * @author gilan
  */
-public class frame_failed_students extends javax.swing.JFrame {
+public class FrameGilangFailedStudents extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frame_failed_students.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameGilangFailedStudents.class.getName());
 
     /**
      * Creates new form main_course_recovery_plan_frame
      */
-    public frame_failed_students() {
+    public FrameGilangFailedStudents() {
         initComponents();
     }
 
@@ -162,7 +162,7 @@ public class frame_failed_students extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new frame_failed_students().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrameGilangFailedStudents().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
