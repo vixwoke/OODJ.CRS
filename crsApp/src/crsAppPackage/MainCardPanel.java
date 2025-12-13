@@ -1,17 +1,21 @@
 package crsAppPackage;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MainCardPanel extends JPanel implements IPanelNavigation {
     private final CardLayout cardLayout = new CardLayout();
     private final LoginCardPanel loginCardPanel = new LoginCardPanel(this);
     private HomePanel homePanel;
-    private User user;
+    private User user = null;
 
     public MainCardPanel() {
         setLayout(cardLayout);
         add(loginCardPanel, LoginPanel.CONSTRAINTS);
+    }
+
+    public boolean isLoggedIn() {
+        return (user != null);
     }
 
     public void goTo(String constraints) {};
@@ -38,6 +42,7 @@ public class MainCardPanel extends JPanel implements IPanelNavigation {
         if (homePanel != null) {
             remove(homePanel);
         }
+        user = null;
         cardLayout.show(this, LoginCardPanel.CONSTRAINTS);
     };
 }

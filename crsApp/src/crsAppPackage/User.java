@@ -286,15 +286,15 @@ public class User {
 
     public void validatePassword(String password) {
         if (password == null) {
-            throw new RuntimeException("Username cannot be blank");
+            throw new RuntimeException("Password cannot be blank");
         }
 
         if (password.length() < 5) {
-            throw new RuntimeException("Minimum character for username is 5");
+            throw new RuntimeException("Minimum character for password is 5");
         }
 
         if (password.length() > 10) {
-            throw new RuntimeException("Maximum character for username is 10");
+            throw new RuntimeException("Maximum character for password is 10");
         }
 
         boolean hasLowercase = false;

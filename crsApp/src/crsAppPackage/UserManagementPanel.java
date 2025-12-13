@@ -253,7 +253,7 @@ public class UserManagementPanel extends JPanel {
                         return;
                     }
 
-                    filters.add(RowFilter.regexFilter("(?i).*" + Pattern.quote(text) + ".*", column));
+                    filters.add(RowFilter.regexFilter("(?i)^" + Pattern.quote(text) + "$", column));
                 }
 
                 if (filters.isEmpty()) {

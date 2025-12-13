@@ -1,10 +1,13 @@
 package crsAppPackage;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.*;
 
 public class MainFrame extends JFrame {
-    private final JPanel cardPanel = new MainCardPanel();
+    private final MainCardPanel cardPanel = new MainCardPanel();
 
     public MainFrame() {
         setTitle("Course Recovery Plan");
@@ -16,5 +19,20 @@ public class MainFrame extends JFrame {
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+
+        // When close record the timestamp if the user has logged in
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Record timestamp
+                if (cardPanel.isLoggedIn()) {
+                    try {
+                        LocalDateTime currentTime = LocalDateTime.now();
+                        FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG OUT", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
+                    } catch (Exception ex) {
+                    }
+                }
+                dispose();
+            }
+        });
     }
 }
