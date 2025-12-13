@@ -1,7 +1,7 @@
 package crsAppPackage;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class UserManagementCardPanel extends JPanel implements IPanelNavigation {
     public static final String CONSTRAINTS = "USER MANAGEMENT";
