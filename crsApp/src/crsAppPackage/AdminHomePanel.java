@@ -1,15 +1,13 @@
 package crsAppPackage;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.Map;
-import java.util.HashMap;
+import javax.swing.*;
 
 public class AdminHomePanel extends HomePanel {
     // Center Panels
     private final UserManagementCardPanel userManagementCardPanel = new UserManagementCardPanel();
     private final EligibilityPanel eligibilityPanel = new EligibilityPanel();
+    private final ReportPanel academicPerformanceReportingPanel = new ReportPanel(this);
     // West Buttons
     private final JButton btnUserManagement = new JButton("Manage User");
     private final JButton btnCheckEligibility = new JButton("Check Eligibility");
@@ -26,6 +24,7 @@ public class AdminHomePanel extends HomePanel {
     protected void placeCenterPanels() {
         addCenterPanel(userManagementCardPanel, "USER_MANAGEMENT");
         addCenterPanel(eligibilityPanel, "CHECK_ELIGIBILITY");
+        addCenterPanel(academicPerformanceReportingPanel, "ACADEMIC_REPORT");
     }
 
     protected void placeWestCenterButtons() {
@@ -53,7 +52,7 @@ public class AdminHomePanel extends HomePanel {
 
         btnAcademicPerformanceReporting.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                goTo("");
+                goTo("ACADEMIC_REPORT");
             }
         });
 
