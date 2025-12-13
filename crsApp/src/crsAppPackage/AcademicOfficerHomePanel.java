@@ -47,9 +47,17 @@ public class AcademicOfficerHomePanel extends HomePanel {
             }
         });
 
-        btnCourseRecoveryPlan.addActionListener(e -> {
-            new FrameCourseRecoveryPlan();
+        // TEMPORARY FORCE OPEN COURSE RECOVERY PLAN
+        // PLEASE CHANGE IT LATER
+        btnCourseRecoveryPlan.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrameCourseRecoveryPlan frame = new FrameCourseRecoveryPlan();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null); // biar muncul di tengah
+            }
         });
+
 
 
         btnLogOut.addActionListener(new ActionListener() {
