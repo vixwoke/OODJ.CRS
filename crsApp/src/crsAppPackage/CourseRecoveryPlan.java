@@ -13,7 +13,7 @@ public class CourseRecoveryPlan {
 
         // Create TableModel (JTable Format)
         DefaultTableModel model = new DefaultTableModel(
-            new String[]{"Student ID", "Course ID", "CGPA"}, 0
+            new String[]{"ID", "Name", "Major", "Course","CGPA"}, 0
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -21,22 +21,44 @@ public class CourseRecoveryPlan {
             }
         };
 
-        // Read file
-        ArrayList<ArrayList<String>> results =
+        // Read files
+        ArrayList<ArrayList<String>> student_results =
             FileManager.readFile("Resources/Data/student_results.txt", 3, new HashMap<>());
 
-        // Filter results
-        for (ArrayList<String> row : results) {
-            double cgpa = Double.parseDouble(row.get(2));
+        ArrayList<ArrayList<String>> student_info =
+            FileManager.readFile("Resources/Data/student_info.txt", 6, new HashMap<>());
 
-            if (cgpa < 2.0) {
+        ArrayList<ArrayList<String>> course_information =
+            FileManager.readFile("Resources/Data/course_information.txt", 6, new HashMap<>());
+
+        // Build lookup maps
+        Map<String, String> studentNameMap = new HashMap<>();
+        for (ArrayList<String> row : student_info) {
+            studentNameMap.put(row.get(0), row.get(1));
+        }
+
+        Map<String, String> courseNameMap = new HashMap<>();
+        for (ArrayList<String> row : course_information) {
+            courseNameMap.put(row.get(0), row.get(1));
+        }
+
+        // Filter + join
+        for (ArrayList<String> row : student_results) {
+            String studentId = row.get(0);
+            String courseId = row.get(1);
+            double gradePoint = Double.parseDouble(row.get(2));
+
+            if (gradePoint < 2.0) {
                 model.addRow(new Object[]{
-                    row.get(0),   // Student ID
-                    row.get(1),   // Course ID
-                    String.format("%.2f", cgpa)
+                    studentId,
+                    studentNameMap.get(studentId),
+                    courseId,
+                    courseNameMap.get(courseId),
+                    String.format("%.2f", gradePoint)
                 });
             }
         }
+
 
         // return 
         return model;
