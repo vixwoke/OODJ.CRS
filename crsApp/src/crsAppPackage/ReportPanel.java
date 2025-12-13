@@ -16,7 +16,6 @@ public class ReportPanel extends JPanel {
     private JButton btnGenerate;
     private JButton btnBack;
 
-    // CONFIGURATION: Check your actual text file name!
     private static final String GRADE_FILE = "student_grades.txt"; 
     private static final int TOTAL_COLUMNS = 6; // ID, Code, Title, Credit, Grade, Point
     private static final int STUDENT_ID_COL_INDEX = 0; 
@@ -115,4 +114,5 @@ public class ReportPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
         }
     }
+
 }
