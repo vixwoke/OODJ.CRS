@@ -137,6 +137,27 @@ public class VerificationPanel extends JPanel {
                         int nextIndex = index + 1;
                         nextIndex = (nextIndex < 6) ? nextIndex : 5;
                         txtOtp[nextIndex].requestFocusInWindow();
+                    } else if (getLength() == 1 && str.length() == 1  && Character.isDigit(str.charAt(0))) {
+                        // Change the number
+                        tf.setText(str);
+                        // Move to the next text Field
+                        int nextIndex = index + 1;
+                        nextIndex = (nextIndex < 6) ? nextIndex : 5;
+                        txtOtp[nextIndex].requestFocusInWindow();
+                    }
+                }
+            });
+
+            tf.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "backspace");
+            tf.getActionMap().put("backspace", new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    if (tf.getText().isEmpty()) {
+                        // Move to the previous text Field
+                        int previousIndex = index - 1;
+                        previousIndex = (previousIndex > 0) ? previousIndex : 0;
+                        txtOtp[previousIndex].requestFocusInWindow();
+                    } else {
+                        tf.getActionMap().get(DefaultEditorKit.deletePrevCharAction).actionPerformed(e);
                     }
                 }
             });
