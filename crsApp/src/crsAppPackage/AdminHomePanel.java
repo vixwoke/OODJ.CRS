@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class AdminHomePanel extends HomePanel {
     // Center Panels
     private final UserManagementCardPanel userManagementCardPanel = new UserManagementCardPanel();
+    private final EligibilityPanel eligibilityPanel = new EligibilityPanel();
     // West Buttons
     private final JButton btnUserManagement = new JButton("Manage User");
     private final JButton btnCheckEligibility = new JButton("Check Eligibility");
@@ -24,6 +25,7 @@ public class AdminHomePanel extends HomePanel {
 
     protected void placeCenterPanels() {
         addCenterPanel(userManagementCardPanel, "USER_MANAGEMENT");
+        addCenterPanel(eligibilityPanel, "CHECK_ELIGIBILITY");
     }
 
     protected void placeWestCenterButtons() {
@@ -45,7 +47,7 @@ public class AdminHomePanel extends HomePanel {
 
         btnCheckEligibility.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                goTo("");
+                goTo("CHECK_ELIGIBILITY");
             }
         });
 
