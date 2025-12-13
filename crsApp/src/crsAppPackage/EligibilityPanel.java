@@ -35,9 +35,6 @@ public class EligibilityPanel extends JPanel {
         sortBox.addActionListener(e -> handleSort());
         topPanel.add(sortBox);
 
-        enrollButton = new JButton("Enroll Student");
-        enrollButton.addActionListener(e -> handleEnrolment()); 
-        topPanel.add(enrollButton);
 
         add(topPanel, BorderLayout.NORTH);
 
@@ -139,29 +136,6 @@ public class EligibilityPanel extends JPanel {
             rowData[4] = statusString;
 
             tableModel.addRow(rowData);
-        }
-    }
-
-    private void handleEnrolment() {
-        int selectedRow = studentTable.getSelectedRow();
-        if(selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a student first.");
-            return;
-        }
-
-        String status = (String) tableModel.getValueAt(selectedRow, 4);
-        String name = (String) tableModel.getValueAt(selectedRow, 1);
-
-        if("Eligible".equals(status)) {
-            JOptionPane.showMessageDialog(this, 
-                "Eligibility Confirmed for " + name + ".\nProceeding to Enrolment Form...", 
-                "Success", JOptionPane.INFORMATION_MESSAGE);
-        } 
-        else {
-            JOptionPane.showMessageDialog(this, 
-                "Student " + name + " is NOT eligible for progression.\n" +
-                "Refer to Course Recovery Plan.", 
-                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
