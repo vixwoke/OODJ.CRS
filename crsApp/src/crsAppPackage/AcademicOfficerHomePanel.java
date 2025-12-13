@@ -47,11 +47,10 @@ public class AcademicOfficerHomePanel extends HomePanel {
             }
         });
 
-        btnCourseRecoveryPlan.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                goTo("");
-            }
+        btnCourseRecoveryPlan.addActionListener(e -> {
+            new FrameCourseRecoveryPlan();
         });
+
 
         btnLogOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

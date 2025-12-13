@@ -1,15 +1,8 @@
 package crsAppPackage;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author gilan
- */
 public class FrameCourseRecoveryPlan extends javax.swing.JFrame {
+    
+    private CourseRecoveryPlan CRPcontroller;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameCourseRecoveryPlan.class.getName());
 
@@ -18,6 +11,12 @@ public class FrameCourseRecoveryPlan extends javax.swing.JFrame {
      */
     public FrameCourseRecoveryPlan() {
         initComponents();
+        CRPcontroller = new CourseRecoveryPlan();
+        loadTable();
+    }
+    
+    private void loadTable() {
+        jTable_Student_Failed.setModel(CRPcontroller.loadFailedStudentsTable());
     }
 
     /**
