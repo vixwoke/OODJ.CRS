@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class AcademicOfficerHomePanel extends HomePanel {
     // Center Panels
+    private final EligibilityPanel eligibilityPanel = new EligibilityPanel();
     // West Buttons
     private final JButton btnCheckEligibility = new JButton("Check Eligibility");
     private final JButton btnAcademicPerformanceReporting = new JButton("Academic Performance & Reporting");
@@ -22,6 +23,7 @@ public class AcademicOfficerHomePanel extends HomePanel {
     }
 
     protected void placeCenterPanels() {
+        addCenterPanel(eligibilityPanel, "CHECK_ELIGIBILITY");
     }
 
     protected void placeWestCenterButtons() {
@@ -37,7 +39,7 @@ public class AcademicOfficerHomePanel extends HomePanel {
 
         btnCheckEligibility.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                goTo("");
+                goTo("CHECK_ELIGIBILITY");
             }
         });
 
