@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 public class AcademicReport {
 
-    // Standard method to output data to a TXT file
+    
     public void generateReport(String studentName, String studentID, String program, String[][] courseData) 
             throws FileNotFoundException {
         
@@ -63,4 +63,5 @@ public class AcademicReport {
             throw new FileNotFoundException("Error creating report file: " + e.getMessage());
         }
     }
+
 }
