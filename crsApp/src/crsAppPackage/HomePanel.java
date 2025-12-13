@@ -32,11 +32,13 @@ public abstract class HomePanel extends JPanel implements IPanelNavigation {
 
     public void goBack() {
         // Record timestamp
+        /*
         try {
             LocalDateTime currentTime = LocalDateTime.now();
             FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG OUT", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
         } catch (Exception e) {
         }
+        */
         
         navigator.goBack();
     };

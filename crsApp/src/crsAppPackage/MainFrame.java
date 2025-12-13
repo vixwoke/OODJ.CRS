@@ -2,8 +2,6 @@ package crsAppPackage;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
@@ -24,13 +22,13 @@ public class MainFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // Record timestamp
-                if (cardPanel.isLoggedIn()) {
+                /*if (cardPanel.isLoggedIn()) {
                     try {
                         LocalDateTime currentTime = LocalDateTime.now();
                         FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG OUT", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
                     } catch (Exception ex) {
                     }
-                }
+                }*/
                 dispose();
             }
         });

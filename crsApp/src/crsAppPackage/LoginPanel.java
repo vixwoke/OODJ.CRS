@@ -66,11 +66,11 @@ public class LoginPanel extends JPanel {
                 }
 
                 // Record timestamp
-                try {
+                /*try {
                     LocalDateTime currentTime = LocalDateTime.now();
                     FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG IN", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
                 } catch (Exception ex) {
-                }
+                }*/
 
                 navigator.goNext();
             }
