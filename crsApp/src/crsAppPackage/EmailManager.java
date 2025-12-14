@@ -5,26 +5,22 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 /**
- * Class utility untuk mengelola koneksi dan pengiriman email (SMTP).
- * Catatan: Membutuhkan library JavaMail API (javax.mail) di classpath.
+ * Class utility for handling connection and email delivery (SMTP).
  */
 public class EmailManager {
 
-    // Ganti dengan kredensial email Anda yang sebenarnya (atau gunakan file konfigurasi)
     private static final String SENDER_EMAIL = "your.application.email@example.com";
-    private static final String SENDER_PASSWORD = "your-app-password"; // Gunakan App Password jika memakai Gmail/Outlook
+    private static final String SENDER_PASSWORD = "your-app-password"; 
 
     private static Session getSession() {
         Properties props = new Properties();
         
-        // Contoh konfigurasi Gmail
+        // Gmail configuration examples
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true"); // TLS untuk keamanan
+        props.put("mail.smtp.starttls.enable", "true"); 
         props.put("mail.smtp.host", "smtp.gmail.com"); 
-        props.put("mail.smtp.port", "587"); // Port standar untuk TLS
+        props.put("mail.smtp.port", "587"); 
 
-        // Tambahkan konfigurasi lain jika diperlukan (misalnya, untuk debugging)
-        // props.put("mail.debug", "true"); 
 
         return Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -33,13 +29,7 @@ public class EmailManager {
         });
     }
 
-    /**
-     * Mengirim email ke satu penerima.
-     * @param recipientEmail Alamat email penerima.
-     * @param subject Subjek email.
-     * @param body Isi email.
-     * @throws MessagingException jika pengiriman gagal.
-     */
+    
     public static void sendEmail(String recipientEmail, String subject, String body) throws MessagingException {
         if (recipientEmail == null || recipientEmail.isBlank()) {
             throw new MessagingException("Recipient email cannot be blank.");
@@ -63,19 +53,13 @@ public class EmailManager {
         }
     }
 
-    /**
-     * Mengirim email secara massal ke daftar penerima.
-     * @param recipientEmails List alamat email penerima.
-     * @param subject Subjek email.
-     * @param body Isi email.
-     * @throws MessagingException jika ada kegagalan total.
-     */
+    
     public static void sendBulkEmail(java.util.List<String> recipientEmails, String subject, String body) throws MessagingException {
         Session session = getSession();
         
         for (String email : recipientEmails) {
             try {
-                // Menggunakan koneksi yang sama untuk mengirim banyak email
+                
                 Message message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(SENDER_EMAIL));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
@@ -84,16 +68,14 @@ public class EmailManager {
                 
                 Transport.send(message);
                 
-                // Jeda sebentar untuk menghindari throttling oleh server SMTP
+                
                 try {
                     Thread.sleep(100); 
                 } catch (InterruptedException ignored) {}
 
             } catch (MessagingException e) {
-                // Mencatat error dan melanjutkan ke penerima berikutnya
                 System.err.println("Failed to send email to " + email + ": " + e.getMessage());
             }
         }
-        // Catatan: Anda mungkin ingin mengembalikan daftar email yang gagal dikirim.
     }
 }

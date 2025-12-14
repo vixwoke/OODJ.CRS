@@ -8,7 +8,7 @@ import javax.mail.MessagingException;
 import javax.swing.*;
 
 /**
- * Panel GUI untuk menyusun dan mengirim notifikasi email.
+ * Email GUI Panel.
  */
 public class EmailNotificationPanel extends JPanel {
     public static final String CONSTRAINTS = "EMAIL NOTIFICATION";
@@ -24,8 +24,7 @@ public class EmailNotificationPanel extends JPanel {
     private final JButton btnSend = new JButton("Send Notification");
     private final JScrollPane bodyScrollPane = new JScrollPane(txtBody);
     
-    // Asumsi: Navigator tidak digunakan dalam panel ini (atau dapat ditambahkan jika perlu)
-    // private final IPanelNavigation navigator; 
+    
 
     public EmailNotificationPanel() {
         // this.navigator = navigator;
@@ -106,29 +105,12 @@ public class EmailNotificationPanel extends JPanel {
         });
     }
     
-    /**
-     * Metode placeholder untuk mendapatkan daftar email penerima.
-     * Metode ini akan memerlukan integrasi dengan class Student.java yang hilang.
-     */
+    
     private List<String> getRecipientList(String type) {
         List<String> emails = new ArrayList<>();
         
-        // *** ASUMSI: MEMBUTUHKAN Student.java (MODEL MAHASISWA) ***
-        // Logika sebenarnya:
-        // switch (type) {
-        //    case "All Students": 
-        //        emails = Student.getAllStudentEmails(); 
-        //        break;
-        //    case "Students Needing Recovery": 
-        //        emails = Student.getFailedStudentEmails(); 
-        //        break;
-        //    case "Specific Email List": 
-        //        // Tampilkan dialog atau gunakan JTextArea untuk input manual
-        //        emails.add("manual.input@example.com"); 
-        //        break;
-        // }
         
-        // Placeholder untuk demonstrasi:
+        // Placeholder for demonstration:
         if (type.contains("All Students")) {
              emails.add("recipient1@example.com");
              emails.add("recipient2@example.com");
