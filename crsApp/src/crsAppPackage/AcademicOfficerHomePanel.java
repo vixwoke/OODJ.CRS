@@ -53,7 +53,7 @@ public class AcademicOfficerHomePanel extends HomePanel {
         btnCourseRecoveryPlan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameCourseRecoveryPlan frame = new FrameCourseRecoveryPlan();
+                CourseRecoveryPlanFrame frame = new CourseRecoveryPlanFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null); // biar muncul di tengah
             }
