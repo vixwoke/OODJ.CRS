@@ -4,6 +4,7 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.util.Properties;
 
 public class PasswordRecoverySession {
     private static final int MAXIMUM_ATTEMPTS = 5;
