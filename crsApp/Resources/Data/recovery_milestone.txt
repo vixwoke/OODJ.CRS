@@ -1,1 +1,5 @@
 MilestoneID?RecoveryID?WeekNo?Task?Status
+MS001?RP001?1?Meet academic advisor?Pass
+MS002?RP001?2?Redo assignment 1?Pass
+MS003?RP001?3?Submit extra coursework?Ongoing
+MS17657179149500?RP026?1?contoh?Ongoing

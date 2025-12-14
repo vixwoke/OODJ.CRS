@@ -1,31 +1,84 @@
 package crsAppPackage;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+import java.util.Map;              // <<< WAJIB
+import javax.swing.table.DefaultTableModel; // (nanti kepake)
 
-/**
- *
- * @author gilan
- */
+
 public class CourseRecoveryPlanDetailsPanel extends javax.swing.JPanel {
-
-    private CourseRecoveryPlanDetails CRPDetailsController;
     
-    private final string studentID;
+    private CourseRecoveryPlanDetails CRPDetailsController;
+    private CourseRecoveryPlanFrame CRPFcontroller;
 
-    /**
-     * Creates new form CourseRecoveryPlanSummary
-     */
-    public CourseRecoveryPlanDetailsPanel(string studentID) {
+    private String thisRecoveryId;
+    
+    public CourseRecoveryPlanDetailsPanel(String recoveryId, String viewMode, String mode) {
+        thisRecoveryId = recoveryId;
         initComponents();
         CRPDetailsController = new CourseRecoveryPlanDetails();
-        refresh();
+        refresh(recoveryId);
+        applyMode(viewMode, mode);
     }
 
-    private void refresh(){
-        jTable_recoveryplandetails.setModel(CRPDetailsController.refreshTable());
+    private void refresh(String recoveryId){
+        Map<String, Object> data = CRPDetailsController.refreshData(recoveryId);
+        
+        // ===== take table =====
+        DefaultTableModel tableModel =
+            (DefaultTableModel) data.get("table");
+         jTable_recoveryplandetails.setModel(tableModel);
+
+        // ===== take details =====
+        Map<String, String> details =
+                (Map<String, String>) data.get("details");
+
+        jTextName.setText(details.get("studentName"));
+        jTextMajor.setText(details.get("studentMajor"));
+        jTextCourse.setText(details.get("courseName"));
+        jCBStatus.setSelectedItem(details.get("recoveryStatus"));
+        jTextRecoveryMarks.setText(details.get("recoveryMarks"));
+    }
+    
+    private void applyMode(String viewMode, String mode){
+        if ("Track".equalsIgnoreCase(viewMode)) {
+
+            // ===== LOCK INPUTS =====
+            jTextName.setEditable(false);
+            jTextMajor.setEditable(false);
+            jTextCourse.setEditable(false);
+            jTextRecoveryMarks.setEditable(false);
+            jCBStatus.setEnabled(false);
+
+            // ===== HIDE BUTTONS =====
+            jBtnSave.setVisible(false);
+            jBtnAddMile.setVisible(false);
+            jBtnDeleteMile.setVisible(false);
+            jBtnFailed.setVisible(false);
+            jBtnPass.setVisible(false);
+            jBtnOngoing.setVisible(false);
+        }
+        else if ("Edit".equalsIgnoreCase(viewMode)) {
+                        // ===== LOCK INPUTS =====
+            jTextName.setEditable(false);
+            jTextMajor.setEditable(false);
+            jTextCourse.setEditable(false);
+            jTextRecoveryMarks.setEditable(true);
+            jCBStatus.setEnabled(true);
+
+            // ===== HIDE BUTTONS =====
+            jBtnSave.setVisible(true);
+            jBtnAddMile.setVisible(true);
+            jBtnDeleteMile.setVisible(true);
+            jBtnFailed.setVisible(true);
+            jBtnPass.setVisible(true);
+            jBtnOngoing.setVisible(true);
+        }
+        if ("add".equalsIgnoreCase(mode)){
+            jTextName.setEditable(false);
+            jTextMajor.setEditable(false);
+            jTextCourse.setEditable(false);
+            jTextRecoveryMarks.setEditable(true);
+            jCBStatus.setEnabled(true);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,15 +89,63 @@ public class CourseRecoveryPlanDetailsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLblTitle = new javax.swing.JLabel();
+        jBtnSave = new javax.swing.JButton();
+        jBtnCancel = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextName = new javax.swing.JTextField();
+        jTextMajor = new javax.swing.JTextField();
+        jTextCourse = new javax.swing.JTextField();
+        jTextRecoveryMarks = new javax.swing.JTextField();
+        jCBStatus = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_recoveryplandetails = new javax.swing.JTable();
-        jBtnOngoing = new javax.swing.JButton();
+        jBtnDeleteMile = new javax.swing.JButton();
+        jBtnAddMile = new javax.swing.JButton();
         jBtnFailed = new javax.swing.JButton();
+        jBtnOngoing = new javax.swing.JButton();
         jBtnPass = new javax.swing.JButton();
-        jLblTitle = new javax.swing.JLabel();
-        JLblSubtitle = new javax.swing.JLabel();
-        jBtnPass1 = new javax.swing.JButton();
-        jBtnPass2 = new javax.swing.JButton();
+
+        jLblTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLblTitle.setText("Recovery Plan & Milestone");
+
+        jBtnSave.setLabel("Save");
+        jBtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSaveActionPerformed(evt);
+            }
+        });
+
+        jBtnCancel.setLabel("Cancel");
+        jBtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Name");
+
+        jLabel2.setText("Major");
+
+        jLabel3.setText("Course");
+
+        jLabel4.setText("Recovery Marks");
+
+        jLabel5.setText("Status");
+
+        jCBStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fail", "Ongoing", "Pass" }));
+        jCBStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBStatusActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTable_recoveryplandetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -67,7 +168,19 @@ public class CourseRecoveryPlanDetailsPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable_recoveryplandetails);
 
-        jBtnOngoing.setLabel("Mark Ongoing");
+        jBtnDeleteMile.setLabel("Delete Milestone");
+        jBtnDeleteMile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnDeleteMileActionPerformed(evt);
+            }
+        });
+
+        jBtnAddMile.setLabel("Add Milestone");
+        jBtnAddMile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddMileActionPerformed(evt);
+            }
+        });
 
         jBtnFailed.setLabel("Mark Failed");
         jBtnFailed.addActionListener(new java.awt.event.ActionListener() {
@@ -76,96 +189,327 @@ public class CourseRecoveryPlanDetailsPanel extends javax.swing.JPanel {
             }
         });
 
+        jBtnOngoing.setLabel("Mark Ongoing");
+        jBtnOngoing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOngoingActionPerformed(evt);
+            }
+        });
+
         jBtnPass.setLabel("Mark Pass");
-
-        jLblTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLblTitle.setText("Recovery Plan & Milestone");
-
-        JLblSubtitle.setText("Select one plan to change status");
-
-        jBtnPass1.setLabel("Save");
-        jBtnPass1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPass1ActionPerformed(evt);
+                jBtnPassActionPerformed(evt);
             }
         });
 
-        jBtnPass2.setLabel("Cancel");
-        jBtnPass2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPass2ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jBtnAddMile, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnDeleteMile, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jBtnFailed, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnOngoing, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jBtnPass, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnDeleteMile)
+                    .addComponent(jBtnAddMile))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnFailed)
+                    .addComponent(jBtnOngoing)
+                    .addComponent(jBtnPass))
+                .addGap(80, 80, 80))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBtnFailed, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jBtnOngoing, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jBtnPass, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JLblSubtitle)
-                            .addComponent(jLblTitle))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextRecoveryMarks, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLblTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(100, 100, 100)
+                                .addComponent(jTextMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(99, 99, 99)
+                                .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(94, 94, 94))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextCourse, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                                    .addComponent(jCBStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLblTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JLblSubtitle))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnPass1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBtnPass2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLblTitle))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnOngoing, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnFailed, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPass, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jTextName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextCourse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextRecoveryMarks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnFailedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnFailedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnFailedActionPerformed
+    DefaultTableModel model =
+        (DefaultTableModel) jTable_recoveryplandetails.getModel();
 
-    private void jBtnPass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPass1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnPass1ActionPerformed
+    int selectedRow = jTable_recoveryplandetails.getSelectedRow();
 
-    private void jBtnPass2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPass2ActionPerformed
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please select a milestone first.",
+            "No Selection",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // Kolom ke-2 = Status
+    model.setValueAt("Fail", selectedRow, 2);    }//GEN-LAST:event_jBtnFailedActionPerformed
+
+    private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
+         String status = jCBStatus.getSelectedItem().toString();
+    String marks  = jTextRecoveryMarks.getText().trim();
+
+    DefaultTableModel tableModel =
+        (DefaultTableModel) jTable_recoveryplandetails.getModel();
+
+    // ===== VALIDASI MILESTONE (WAJIB) =====
+    for (int i = 0; i < tableModel.getRowCount(); i++) {
+
+        Object weekObj = tableModel.getValueAt(i, 0);
+        Object taskObj = tableModel.getValueAt(i, 1);
+
+        String week = (weekObj == null) ? "" : weekObj.toString().trim();
+        String task = (taskObj == null) ? "" : taskObj.toString().trim();
+
+        if (week.isEmpty() || task.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Week and Task cannot be empty.\nPlease complete all milestone entries.",
+                "Validation Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+
+            // fokus ke row yang salah (UX bagus)
+            jTable_recoveryplandetails.setRowSelectionInterval(i, i);
+            jTable_recoveryplandetails.editCellAt(i, 0);
+            return; // ⛔ STOP SAVE
+        }
+    }
+
+    // ===== LANJUT SAVE =====
+    CRPDetailsController.saveAll(
+        thisRecoveryId,
+        status,
+        marks,
+        tableModel
+    );
+
+    javax.swing.JOptionPane.showMessageDialog(
+        this,
+        "Recovery plan saved successfully."
+    );
+
+    // ===== TUTUP PANEL =====
+    java.awt.Window window =
+        javax.swing.SwingUtilities.getWindowAncestor(this);
+    window.dispose();
+
+    // ===== REFRESH FRAME UTAMA =====
+    CRPFcontroller = new CourseRecoveryPlanFrame();
+    CRPFcontroller.refreshData();
+    }//GEN-LAST:event_jBtnSaveActionPerformed
+
+    private void jBtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelActionPerformed
+        
+        java.awt.Window window =
+                javax.swing.SwingUtilities.getWindowAncestor(this);
+
+        if (window != null) {
+            window.dispose(); // tutup dialog
+        }
+       CRPFcontroller = new CourseRecoveryPlanFrame();
+       CRPFcontroller.refreshData();
+    }//GEN-LAST:event_jBtnCancelActionPerformed
+
+    private void jCBStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBStatusActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnPass2ActionPerformed
+    }//GEN-LAST:event_jCBStatusActionPerformed
+
+    private void jBtnAddMileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddMileActionPerformed
+        DefaultTableModel model =
+            (DefaultTableModel) jTable_recoveryplandetails.getModel();
+
+
+        model.addRow(new Object[]{
+            "",   // Week
+            "",                   // Task (kosong, user isi)
+            "Ongoing"             // Status default
+        });
+    }//GEN-LAST:event_jBtnAddMileActionPerformed
+
+    private void jBtnDeleteMileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteMileActionPerformed
+        DefaultTableModel model =
+            (DefaultTableModel) jTable_recoveryplandetails.getModel();
+
+        int selectedRow = jTable_recoveryplandetails.getSelectedRow();
+
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Please select a milestone to remove.",
+                "No Selection",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to remove the selected milestone?",
+            "Confirm Remove",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        model.removeRow(selectedRow);
+    }//GEN-LAST:event_jBtnDeleteMileActionPerformed
+
+    private void jBtnOngoingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOngoingActionPerformed
+
+    DefaultTableModel model =
+        (DefaultTableModel) jTable_recoveryplandetails.getModel();
+
+    int selectedRow = jTable_recoveryplandetails.getSelectedRow();
+
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please select a milestone first.",
+            "No Selection",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // Kolom ke-2 = Status
+    model.setValueAt("Ongoing", selectedRow, 2);    }//GEN-LAST:event_jBtnOngoingActionPerformed
+
+    private void jBtnPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPassActionPerformed
+ DefaultTableModel model =
+        (DefaultTableModel) jTable_recoveryplandetails.getModel();
+
+    int selectedRow = jTable_recoveryplandetails.getSelectedRow();
+
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Please select a milestone first.",
+            "No Selection",
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
+
+    // Kolom ke-2 = Status
+    model.setValueAt("Pass", selectedRow, 2);
+    }//GEN-LAST:event_jBtnPassActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLblSubtitle;
+    private javax.swing.JButton jBtnAddMile;
+    private javax.swing.JButton jBtnCancel;
+    private javax.swing.JButton jBtnDeleteMile;
     private javax.swing.JButton jBtnFailed;
     private javax.swing.JButton jBtnOngoing;
     private javax.swing.JButton jBtnPass;
-    private javax.swing.JButton jBtnPass1;
-    private javax.swing.JButton jBtnPass2;
+    private javax.swing.JButton jBtnSave;
+    private javax.swing.JComboBox<String> jCBStatus;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLblTitle;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_recoveryplandetails;
+    private javax.swing.JTextField jTextCourse;
+    private javax.swing.JTextField jTextMajor;
+    private javax.swing.JTextField jTextName;
+    private javax.swing.JTextField jTextRecoveryMarks;
     // End of variables declaration//GEN-END:variables
 }

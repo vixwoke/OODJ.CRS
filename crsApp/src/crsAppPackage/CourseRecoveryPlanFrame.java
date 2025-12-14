@@ -1,4 +1,9 @@
 package crsAppPackage;
+import javax.swing.JOptionPane;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
+import java.awt.Dialog;
+
 
 public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
     
@@ -12,11 +17,11 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
     public CourseRecoveryPlanFrame() {
         initComponents();
         CRPcontroller = new CourseRecoveryPlan();
-        loadTable();
+        refreshData();
     }
     
-    private void loadTable() {
-        jTable_Student_Failed.setModel(CRPcontroller.loadFailedStudentsTable(false));
+    public void refreshData() {
+        jTable_Student_Failed.setModel(CRPcontroller.loadFailedStudentsTable());
     }
 
     /**
@@ -33,13 +38,9 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
         jTable_Student_Failed = new javax.swing.JTable();
         jTF_SearchIDName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton_Plan_Editor = new javax.swing.JButton();
-        jButton_Milestone = new javax.swing.JButton();
-        jButton_Milestone1 = new javax.swing.JButton();
-        jCB_Batch_Edit = new javax.swing.JCheckBox();
-        jButton_Milestone2 = new javax.swing.JButton();
-        jButton_Milestone3 = new javax.swing.JButton();
-        jButton_Milestone4 = new javax.swing.JButton();
+        jBtnEditPlan = new javax.swing.JButton();
+        jBtnDeletePlan = new javax.swing.JButton();
+        jBtnTrackPlan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +77,7 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
             jPanel_Student_FailedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_Student_FailedLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPanel_Student_Failed, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addComponent(jScrollPanel_Student_Failed, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTF_SearchIDName.setText("Search here...");
@@ -94,55 +94,43 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Search by Student ID or Name");
 
-        jButton_Plan_Editor.setLabel("Delete Plan");
-
-        jButton_Milestone.setLabel("Add Plan");
-        jButton_Milestone.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditPlan.setLabel("Add/Edit Plan");
+        jBtnEditPlan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_MilestoneActionPerformed(evt);
+                jBtnEditPlanActionPerformed(evt);
             }
         });
 
-        jButton_Milestone1.setLabel("Edit Plan");
-
-        jCB_Batch_Edit.setText("Multiple Select");
-        jCB_Batch_Edit.addActionListener(new java.awt.event.ActionListener() {
+        jBtnDeletePlan.setLabel("Delete Plan");
+        jBtnDeletePlan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCB_Batch_EditActionPerformed(evt);
+                jBtnDeletePlanActionPerformed(evt);
             }
         });
 
-        jButton_Milestone2.setLabel("Failed");
-
-        jButton_Milestone3.setLabel("Ongoing");
-
-        jButton_Milestone4.setLabel("Pass");
+        jBtnTrackPlan.setActionCommand("Track");
+        jBtnTrackPlan.setLabel("Track Plan");
+        jBtnTrackPlan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTrackPlanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCB_Batch_Edit)
+                        .addComponent(jBtnTrackPlan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_Milestone1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Milestone2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_Milestone, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_Plan_Editor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_Milestone3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_Milestone4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jPanel_Student_Failed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBtnEditPlan)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBtnDeletePlan))
+                    .addComponent(jPanel_Student_Failed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -156,32 +144,18 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTF_SearchIDName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel_Student_Failed, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Milestone2)
-                            .addComponent(jButton_Milestone3)
-                            .addComponent(jButton_Milestone4))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_Plan_Editor)
-                            .addComponent(jButton_Milestone)
-                            .addComponent(jButton_Milestone1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jCB_Batch_Edit)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_Student_Failed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnEditPlan)
+                    .addComponent(jBtnDeletePlan)
+                    .addComponent(jBtnTrackPlan))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCB_Batch_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_Batch_EditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCB_Batch_EditActionPerformed
 
     private void jTF_SearchIDNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_SearchIDNameActionPerformed
         // TODO add your handling code here:
@@ -193,9 +167,124 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTF_SearchIDNameFocusGained
 
-    private void jButton_MilestoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_MilestoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_MilestoneActionPerformed
+    private void jBtnTrackPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTrackPlanActionPerformed
+        // 1. Ambil row yang dipilih
+        int selectedRow = jTable_Student_Failed.getSelectedRow();
+
+        // 2. Validasi: belum pilih row
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please select a recovery plan first.",
+                "No Selection",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // 3. Ambil recoveryId dari kolom 0
+        String recoveryId =
+                jTable_Student_Failed.getValueAt(selectedRow, 5).toString();
+                    String mode;
+            if(recoveryId.equals(0)){
+                mode = "Add";
+            } else{
+                mode = "Update";
+            }
+
+        // 4. Buat panel details (kamu SUDAH punya ini)
+        CourseRecoveryPlanDetailsPanel detailsPanel = new CourseRecoveryPlanDetailsPanel(recoveryId,"Track",mode);
+
+        // 5. Tampilkan panel (pilih salah satu cara di bawah)
+
+        // === CARA A: tampil di dialog (PALING AMAN) ===
+        JDialog dialog = new JDialog(
+                SwingUtilities.getWindowAncestor(this),
+                "Recovery Plan Details",
+                Dialog.ModalityType.APPLICATION_MODAL
+        );
+        dialog.setContentPane(detailsPanel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jBtnTrackPlanActionPerformed
+
+    private void jBtnEditPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditPlanActionPerformed
+            // 1. Ambil row yang dipilih
+            int selectedRow = jTable_Student_Failed.getSelectedRow();
+
+            // 2. Validasi: belum pilih row
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Please select a recovery plan first.",
+                    "No Selection",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // 3. Ambil recoveryId dari kolom 0
+            String recoveryId =
+                    jTable_Student_Failed.getValueAt(selectedRow, 5).toString();
+            String mode;
+            if(recoveryId.equals(0)){
+                mode = "Add";
+            } else{
+                mode = "Update";
+            }
+
+            // 4. Buat panel details (kamu SUDAH punya ini)
+            CourseRecoveryPlanDetailsPanel detailsPanel = new CourseRecoveryPlanDetailsPanel(recoveryId,"Edit", mode);
+
+            // 5. Tampilkan panel (pilih salah satu cara di bawah)
+
+            // === CARA A: tampil di dialog (PALING AMAN) ===
+            JDialog dialog = new JDialog(
+                    SwingUtilities.getWindowAncestor(this),
+                    "Recovery Plan Details",
+                    Dialog.ModalityType.APPLICATION_MODAL
+            );
+            dialog.setContentPane(detailsPanel);
+            dialog.pack();
+            dialog.setLocationRelativeTo(this);
+            dialog.setVisible(true);
+    }//GEN-LAST:event_jBtnEditPlanActionPerformed
+
+    private void jBtnDeletePlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeletePlanActionPerformed
+    int selectedRow = jTable_Student_Failed.getSelectedRow();
+
+       if (selectedRow == -1) {
+           JOptionPane.showMessageDialog(
+               this,
+               "Please select a recovery plan to delete.",
+               "No Selection",
+               JOptionPane.WARNING_MESSAGE
+           );
+           return;
+       }
+
+       String recoveryId =
+               jTable_Student_Failed.getValueAt(selectedRow, 5).toString();
+        System.out.println(recoveryId);
+       int confirm = JOptionPane.showConfirmDialog(
+               this,
+               "Are you sure you want to delete Recovery Plan " + recoveryId + "?",
+               "Confirm Delete",
+               JOptionPane.YES_NO_OPTION
+       );
+
+       if (confirm != JOptionPane.YES_OPTION) {
+           return;
+       }
+
+       // === CALL CONTROLLER ===
+       CourseRecoveryPlan controller = new CourseRecoveryPlan();
+       controller.deleteRecoveryPlan(recoveryId);
+
+       // === REFRESH TABLE ===
+       refreshData(); // method kamu yang reload JTable
+    }//GEN-LAST:event_jBtnDeletePlanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,13 +312,9 @@ public class CourseRecoveryPlanFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton_Milestone;
-    private javax.swing.JButton jButton_Milestone1;
-    private javax.swing.JButton jButton_Milestone2;
-    private javax.swing.JButton jButton_Milestone3;
-    private javax.swing.JButton jButton_Milestone4;
-    private javax.swing.JButton jButton_Plan_Editor;
-    private javax.swing.JCheckBox jCB_Batch_Edit;
+    private javax.swing.JButton jBtnDeletePlan;
+    private javax.swing.JButton jBtnEditPlan;
+    private javax.swing.JButton jBtnTrackPlan;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel_Student_Failed;
     private javax.swing.JScrollPane jScrollPanel_Student_Failed;
