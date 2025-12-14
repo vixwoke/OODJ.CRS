@@ -31,7 +31,7 @@ public class AdminHomePanel extends HomePanel {
     }
 
     protected void placeWestCenterButtons() {
-        setWestCenterPanelLayout(4);
+        setWestCenterPanelLayout(5);
         addWestCenterPanel(btnUserManagement);
         addWestCenterPanel(btnCheckEligibility);
         addWestCenterPanel(btnAcademicPerformanceReporting);
