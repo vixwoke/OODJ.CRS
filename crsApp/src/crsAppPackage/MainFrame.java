@@ -22,13 +22,13 @@ public class MainFrame extends JFrame {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 // Record timestamp
-                /*if (cardPanel.isLoggedIn()) {
+                if (cardPanel.isLoggedIn()) {
                     try {
                         LocalDateTime currentTime = LocalDateTime.now();
                         FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG OUT", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
                     } catch (Exception ex) {
                     }
-                }*/
+                }
                 dispose();
             }
         });

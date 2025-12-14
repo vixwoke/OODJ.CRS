@@ -1,10 +1,10 @@
 package crsAppPackage;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import javax.swing.*;
 
 public class LoginPanel extends JPanel {
     public static final String CONSTRAINTS = "LOGIN";
@@ -66,11 +66,11 @@ public class LoginPanel extends JPanel {
                 }
 
                 // Record timestamp
-                /*try {
+                try {
                     LocalDateTime currentTime = LocalDateTime.now();
                     FileManager.addData("Resources/Data/Timestamp.txt", new String[] { "LOG IN", currentTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")) });
                 } catch (Exception ex) {
-                }*/
+                }
 
                 navigator.goNext();
             }

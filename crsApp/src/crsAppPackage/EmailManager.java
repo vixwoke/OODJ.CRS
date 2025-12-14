@@ -1,12 +1,12 @@
-package crsAppPackage;
+/*package crsAppPackage;
 
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-/**
- * Class utility for handling connection and email delivery (SMTP).
- */
+
+// Class utility for handling connection and email delivery (SMTP).
+
 public class EmailManager {
 
     private static final String SENDER_EMAIL = "your.application.email@example.com";
@@ -79,3 +79,4 @@ public class EmailManager {
         }
     }
 }
+*/

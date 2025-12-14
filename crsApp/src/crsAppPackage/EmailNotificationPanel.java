@@ -1,3 +1,4 @@
+/*
 package crsAppPackage;
 
 import java.awt.*;
@@ -7,9 +8,9 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.swing.*;
 
-/**
- * Email GUI Panel.
- */
+
+// Email GUI Panel.
+
 public class EmailNotificationPanel extends JPanel {
     public static final String CONSTRAINTS = "EMAIL NOTIFICATION";
     
@@ -121,3 +122,4 @@ public class EmailNotificationPanel extends JPanel {
         return emails;
     }
 }
+*/
