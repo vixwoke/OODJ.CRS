@@ -8,10 +8,12 @@ public class AdminHomePanel extends HomePanel {
     private final UserManagementCardPanel userManagementCardPanel = new UserManagementCardPanel();
     private final EligibilityPanel eligibilityPanel = new EligibilityPanel();
     private final ReportPanel academicPerformanceReportingPanel = new ReportPanel(this);
+    private final EmailNotificationPanel emailPanel = new EmailNotificationPanel();
     // West Buttons
     private final JButton btnUserManagement = new JButton("Manage User");
     private final JButton btnCheckEligibility = new JButton("Check Eligibility");
     private final JButton btnAcademicPerformanceReporting = new JButton("Academic Performance & Reporting");
+    private final JButton btnEmailNotif = new JButton("Email Notification");
     private final JButton btnLogOut = new JButton("Log Out");
 
     public AdminHomePanel(IPanelNavigation navigator) {
@@ -25,6 +27,7 @@ public class AdminHomePanel extends HomePanel {
         addCenterPanel(userManagementCardPanel, "USER_MANAGEMENT");
         addCenterPanel(eligibilityPanel, "CHECK_ELIGIBILITY");
         addCenterPanel(academicPerformanceReportingPanel, "ACADEMIC_REPORT");
+        addCenterPanel(emailPanel, "EMAIL");
     }
 
     protected void placeWestCenterButtons() {
@@ -32,6 +35,7 @@ public class AdminHomePanel extends HomePanel {
         addWestCenterPanel(btnUserManagement);
         addWestCenterPanel(btnCheckEligibility);
         addWestCenterPanel(btnAcademicPerformanceReporting);
+        addWestCenterPanel(btnEmailNotif);
         addWestCenterPanel(btnLogOut);
     }
 
@@ -53,6 +57,12 @@ public class AdminHomePanel extends HomePanel {
         btnAcademicPerformanceReporting.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 goTo("ACADEMIC_REPORT");
+            }
+        });
+
+        btnEmailNotif.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                goTo("EMAIL");
             }
         });
 

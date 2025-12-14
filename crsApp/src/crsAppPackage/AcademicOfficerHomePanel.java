@@ -7,10 +7,12 @@ public class AcademicOfficerHomePanel extends HomePanel {
     // Center Panels
     private final EligibilityPanel eligibilityPanel = new EligibilityPanel();
     private final ReportPanel academicPerformanceReportingPanel = new ReportPanel(this);
+    private final EmailNotificationPanel emailPanel = new EmailNotificationPanel();
     // West Buttons
     private final JButton btnCheckEligibility = new JButton("Check Eligibility");
     private final JButton btnAcademicPerformanceReporting = new JButton("Academic Performance & Reporting");
     private final JButton btnCourseRecoveryPlan = new JButton("Course Recovery Plan");
+    private final JButton btnEmailNotif = new JButton("Email Notification");
     private final JButton btnLogOut = new JButton("Log Out");
 
     public AcademicOfficerHomePanel(IPanelNavigation navigator) {
@@ -23,13 +25,15 @@ public class AcademicOfficerHomePanel extends HomePanel {
     protected void placeCenterPanels() {
         addCenterPanel(eligibilityPanel, "CHECK_ELIGIBILITY");
         addCenterPanel(academicPerformanceReportingPanel, "ACADEMIC_REPORT");
+        addCenterPanel(emailPanel, "EMAIL");
     }
 
     protected void placeWestCenterButtons() {
-        setWestCenterPanelLayout(4);
+        setWestCenterPanelLayout(5);
         addWestCenterPanel(btnCheckEligibility);
         addWestCenterPanel(btnAcademicPerformanceReporting);
         addWestCenterPanel(btnCourseRecoveryPlan);
+        addWestCenterPanel(btnEmailNotif);
         addWestCenterPanel(btnLogOut);
     }
 
@@ -59,7 +63,11 @@ public class AcademicOfficerHomePanel extends HomePanel {
             }
         });
 
-
+        btnEmailNotif.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                goTo("EMAIL");
+            }
+        });
 
         btnLogOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
