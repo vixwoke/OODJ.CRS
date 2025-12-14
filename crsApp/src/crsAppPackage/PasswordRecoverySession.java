@@ -2,9 +2,6 @@ package crsAppPackage;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.util.Properties;
 
 public class PasswordRecoverySession {
     private static final int MAXIMUM_ATTEMPTS = 5;
@@ -72,11 +69,8 @@ public class PasswordRecoverySession {
 
     private void sendOtp() {
         try {
-            EmailManager.sendEmail(getEmail(), "Your otp number is:", otp);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Couldn't send the email");
+            System.out.println("Your otp is: " + otp);
         } catch (Exception e) {
-            throw new RuntimeException("Unexpected error occurs when sending email");
         }
     }
 }
