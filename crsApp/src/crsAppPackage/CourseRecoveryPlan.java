@@ -9,31 +9,27 @@ import java.util.HashMap;
 
 public class CourseRecoveryPlan {
 
-     public TableModel loadFailedStudentsTable(boolean batchMode) {
+     public TableModel loadFailedStudentsTable() {
 
         // ===== TABLE HEADER =====
         String[] columns;
 
-        if (batchMode) {
-            columns = new String[]{"", "Student ID", "Student Name", "Major", "Course", "Grade Point", "Status"};
-        } else {
-            columns = new String[]{"Student ID", "Student Name", "Major", "Course", "Grade Point", "Status"};
-        }
+            columns = new String[]{"Student ID", "Student Name", "Major", "Course", "Grade Point", "Recovery ID", "Status"};
 
         // ===== TABLE MODEL =====
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
 
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                if (batchMode && columnIndex == 0) {
-                    return Boolean.class;
-                }
-                return String.class;
-            }
+//            @Override
+//            public Class<?> getColumnClass(int columnIndex) {
+//                if (batchMode && columnIndex == 0) {
+//                    return Boolean.class;
+//                }
+//                return String.class;
+//            }
 
             @Override
             public boolean isCellEditable(int row, int column) {
-                return batchMode && column == 0;
+                return column == 0;
             }
         };
 
@@ -55,6 +51,7 @@ public class CourseRecoveryPlan {
         Map<String, String> studentLastNameMap  = new HashMap<>();
         Map<String, String> studentMajorMap     = new HashMap<>();
         Map<String, String> courseNameMap       = new HashMap<>();
+        Map<String, String> recoveryIdMap       = new HashMap<>();
 
         // 🔑 composite key: studentId|courseId -> status
         Map<String, String> recoveryStatusMap   = new HashMap<>();
@@ -73,13 +70,15 @@ public class CourseRecoveryPlan {
 
         // ===== RECOVERY PLAN (COMPOSITE KEY) =====
         for (ArrayList<String> row : recovery_plan) {
-            System.out.println(row);
-            String studentId = row.get(1);
-            String courseId  = row.get(2);
-            String status    = row.get(3);
+            String recoveryId   = row.get(0);
+            String studentId    = row.get(1);
+            String courseId     = row.get(2);
+            String status       = row.get(3);
 
             String key = studentId + "|" + courseId;
             recoveryStatusMap.put(key, status);
+            recoveryIdMap.put(key, recoveryId);
+            
         }
 
         // ===== FILTER + JOIN =====
@@ -88,80 +87,47 @@ public class CourseRecoveryPlan {
             String studentId = row.get(0);
             String courseId  = row.get(1);
             double gradePoint = Double.parseDouble(row.get(2));
-            System.out.println(row);
 
             if (gradePoint < 2.0) {
 
                 String key = studentId + "|" + courseId;
                 String recoveryStatus =
                         recoveryStatusMap.getOrDefault(key, "No Recovery");
+                String recoveryId =
+                        recoveryIdMap.getOrDefault(key,"0");
 
-                if (batchMode) {
-                    model.addRow(new Object[]{
-                        false,
-                        studentId,
-                        studentFirstNameMap.get(studentId) + " " + studentLastNameMap.get(studentId),
-                        studentMajorMap.get(studentId),
-                        courseNameMap.get(courseId),
-                        String.format("%.2f", gradePoint),
-                        recoveryStatus
-                    });
-                } else {
-                    model.addRow(new Object[]{
-                        studentId,
-                        studentFirstNameMap.get(studentId) + " " + studentLastNameMap.get(studentId),
-                        studentMajorMap.get(studentId),
-                        courseNameMap.get(courseId),
-                        String.format("%.2f", gradePoint),
-                        recoveryStatus
-                    });
-                }
+                model.addRow(new Object[]{
+                    studentId,
+                    studentFirstNameMap.get(studentId) + " " + studentLastNameMap.get(studentId),
+                    studentMajorMap.get(studentId),
+                    courseNameMap.get(courseId),
+                    String.format("%.2f", gradePoint),
+                    recoveryId,
+                    recoveryStatus
+                });
+                
             }
         }
 
         return model;
      }
 
-    // ===== AMBIL SEMUA STUDENT ID YANG DI-CHECK =====
-    public List<String> getSelectedStudentIds(DefaultTableModel model) {
-
-        List<String> selectedIds = new ArrayList<>();
-
-        for (int i = 0; i < model.getRowCount(); i++) {
-            Boolean checked = (Boolean) model.getValueAt(i, 0);
-
-            if (checked != null && checked) {
-                String studentId = model.getValueAt(i, 1).toString();
-                selectedIds.add(studentId);
-            }
-        }
-        return selectedIds;
-    }
-    
-    public void addRecoveryPlan(List<String> studentIds) {
-
-//        if (studentIds == null || studentIds.isEmpty()) {
-//            return; // atau throw exception / show message di UI
-//        }
-//
-//        CourseRecoveryPlanDetailsPanel planEditor = new CourseRecoveryPlanDetailsPanel(studentIds);
-//        planEditor.setVisible(true);
-    }
-
-    
-    public void editRecoveryPlan(List<String> studentIds){
+   
+    public void editRecoveryPlan(String studentIds){
         
     }
 
-    public void deleteRecoveryPlan(List<String> studentIds) {
-        for (String studentId : studentIds) {
-            FileManager.deleteData(
-                "Resources/Data/recovery_plan.txt",
-                new HashMap<Integer, String>() {{
-                    put(1, studentId);
-                }}
-            );
-        }
+    public boolean deleteRecoveryPlan(String recoveryId) {
+
+        String path = "Resources/Data/recovery_plan.txt";
+
+        Map<Integer, String> conditions = new HashMap<>();
+        conditions.put(0, recoveryId); // kolom 0 = RecoveryID
+
+        int deletedRows = FileManager.deleteData(path, conditions);
+
+        return deletedRows > 0;
     }
+
 
 }
