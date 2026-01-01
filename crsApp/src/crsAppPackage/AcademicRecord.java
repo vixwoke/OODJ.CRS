@@ -17,7 +17,7 @@ public class AcademicRecord {
     }
 
     public boolean isPass() {
-        return grade >= 1.0;
+        return grade >= 2.0;
     }
 
     public int getCreditHours() {
