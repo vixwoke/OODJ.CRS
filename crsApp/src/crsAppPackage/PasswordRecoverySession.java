@@ -69,8 +69,12 @@ public class PasswordRecoverySession {
 
     private void sendOtp() {
         try {
-            System.out.println("Your otp is: " + otp);
+            EmailManager.sendEmail(getEmail(), "Your OTP Number", otp);
+        }
+        catch (MessagingException e){
+            new RuntimeException("Error occured when sending email");
         } catch (Exception e) {
+            new RuntimeException("Error occured when sending email");
         }
     }
 }

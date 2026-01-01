@@ -1,4 +1,4 @@
-/*package crsAppPackage;
+package crsAppPackage;
 
 import java.util.Properties;
 import javax.mail.*;
@@ -9,25 +9,30 @@ import javax.mail.internet.*;
 
 public class EmailManager {
 
-    private static final String SENDER_EMAIL = "your.application.email@example.com";
-    private static final String SENDER_PASSWORD = "your-app-password"; 
+    private static final String SENDER_EMAIL = "zhangxiaoli868686@gmail.com";
+    private static final String SENDER_PASSWORD = "cxot ebzt xunh psah"; 
 
     private static Session getSession() {
-        Properties props = new Properties();
-        
-        // Gmail configuration examples
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true"); 
-        props.put("mail.smtp.host", "smtp.gmail.com"); 
-        props.put("mail.smtp.port", "587"); 
+    Properties props = new Properties();
 
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.starttls.required", "true");
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.port", "587");
 
-        return Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SENDER_EMAIL, SENDER_PASSWORD);
-            }
-        });
-    }
+    // 🔑 IMPORTANT FIXES
+    props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+    props.put("mail.debug", "true"); // optional, helps debugging
+
+    return Session.getInstance(props, new Authenticator() {
+        @Override
+        protected PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(SENDER_EMAIL, SENDER_PASSWORD);
+        }
+    });
+}
+
 
     
     public static void sendEmail(String recipientEmail, String subject, String body) throws MessagingException {
@@ -79,4 +84,3 @@ public class EmailManager {
         }
     }
 }
-*/
