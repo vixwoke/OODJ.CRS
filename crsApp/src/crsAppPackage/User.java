@@ -231,9 +231,10 @@ public class User {
 
         // Validated
         int numOfAffectedLine;
+        String oldUsername = this.username;
         try {
             numOfAffectedLine =  FileManager.updateData(FILE_PATH, new String[] {newUsername, newPassword, newRole, newEmail, (active) ? STATUS.ACTIVE : STATUS.INACTIVE,
-                newName, newGender}, new HashMap<Integer, String>() { {put(0, newUsername);} });
+                newName, newGender}, new HashMap<Integer, String>() { {put(0, oldUsername);} });
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
