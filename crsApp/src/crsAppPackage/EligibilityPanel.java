@@ -12,7 +12,6 @@ public class EligibilityPanel extends JPanel {
     private EligibilityManager manager;
     private JComboBox<String> filterBox;
     private JComboBox<String> sortBox;
-    private JButton enrollButton;
 
     public EligibilityPanel() {
         manager = new EligibilityManager();

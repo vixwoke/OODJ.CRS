@@ -37,7 +37,7 @@ public class EligibilityManager {
             }
         } 
         catch(Exception e) { 
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error loading courses: " + e.getMessage());
         }
 
         //Load Students
@@ -53,7 +53,7 @@ public class EligibilityManager {
             }
         } 
         catch(Exception e) { 
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error loading students: " + e.getMessage());
         }
 
         //Load Results
@@ -91,7 +91,7 @@ public class EligibilityManager {
             }
         } 
         catch(Exception e) { 
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error loading results: " + e.getMessage());
         }
     }
 

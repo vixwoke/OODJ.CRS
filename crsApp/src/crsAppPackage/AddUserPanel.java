@@ -1,8 +1,6 @@
 package crsAppPackage;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
 public class AddUserPanel extends AddUpdateUserPanel {
     public static final String CONSTRAINTS = "ADD USER";
@@ -13,7 +11,7 @@ public class AddUserPanel extends AddUpdateUserPanel {
     }
 
     protected boolean btnConfirmDoClick() {
-        int answer = JOptionPane.showConfirmDialog(this, "Do you want to register a new user ( " + getUserName() + " )?", "Add User", JOptionPane.OK_CANCEL_OPTION);
+        int answer = JOptionPane.showConfirmDialog(this, "Do you want to register a new user ( " + getUsername() + " )?", "Add User", JOptionPane.OK_CANCEL_OPTION);
         if (answer != JOptionPane.OK_OPTION) {
             return false;
         }
