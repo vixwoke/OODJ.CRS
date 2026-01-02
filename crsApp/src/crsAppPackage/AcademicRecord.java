@@ -11,16 +11,23 @@ public class AcademicRecord {
         this.creditHours = creditHours;
         this.grade = grade;
     }
-
+ 
+    public String getCourseId(){
+        return courseId;
+    }
+    
+    
     public double getGradePoints() {
         return grade;
     }
 
     public boolean isPass() {
-        return grade >= 1.0;
+        return grade >= 2.0;
     }
 
     public int getCreditHours() {
         return creditHours;
     }
+   
+    
 }

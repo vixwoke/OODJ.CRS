@@ -57,7 +57,7 @@ public class AcademicOfficerHomePanel extends HomePanel {
         btnCourseRecoveryPlan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CourseRecoveryPlanFrame frame = new CourseRecoveryPlanFrame();
+                FailedStudentListFrame frame = new FailedStudentListFrame();
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null); //to make it in the middle
             }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -28,7 +28,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnUnlockEdit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnRemove" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblTip" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -36,14 +40,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="separator1" max="32767" attributes="0"/>
                           <Component id="panelCourseRecoveryPlanList" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnViewMilestone" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cboxStatus" min="-2" pref="156" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnClose" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="panelStudentDetails" alignment="0" max="32767" attributes="0"/>
@@ -58,12 +57,10 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnClose" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cboxStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="separator1" min="-2" pref="10" max="-2" attributes="0"/>
@@ -74,13 +71,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnUnlockEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTip" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="panelCourseRecoveryPlanList" min="-2" pref="414" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnViewMilestone" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -112,31 +109,19 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tblCourseRecoveryPlanList">
+            <Component class="javax.swing.JTable" name="tblMilestonePlanList">
               <Properties>
                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="4">
-                    <Column editable="false" title="Course Name" type="java.lang.String"/>
-                    <Column editable="true" title="Current Grade" type="java.lang.Double"/>
-                    <Column editable="true" title="Target Grade" type="java.lang.Double"/>
-                    <Column editable="true" title="Recovered Grade" type="java.lang.Double"/>
-                    <Column editable="true" title="Action" type="java.lang.String"/>
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="false" title="Week" type="java.lang.Integer"/>
+                    <Column editable="false" title="Task" type="java.lang.String"/>
                     <Column editable="false" title="Status" type="java.lang.String"/>
+                    <Column editable="false" title="Grade Entry" type="java.lang.Double"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="1">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -162,6 +147,9 @@
                 <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="list_student_failed" noResource="true"/>
                 <Property name="selectionMode" type="int" value="1"/>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
+                </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -171,21 +159,12 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnViewMilestone">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Milestone"/>
-        <Property name="actionCommand" type="java.lang.String" value="Track"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewMilestoneActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Course Recovery Plan"/>
+        <Property name="text" type="java.lang.String" value="Milestone Plan"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnClose">
@@ -230,14 +209,8 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="colonCGPA" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                          <Component id="lblStudentCGPA" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                          <Component id="lblYear" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="colonYear" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lblStudentYear" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
+                          <Component id="lblCourseName" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="lblStudentMajor" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -251,13 +224,10 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="colonId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblYear" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="colonYear" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblCGPA" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblStudentId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblStudentYear" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="colonCGPA" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblStudentCGPA" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCourseName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -278,12 +248,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="colonMajor">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=":"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="colonYear">
           <Properties>
             <Property name="text" type="java.lang.String" value=":"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
@@ -313,9 +277,9 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentCGPA">
+        <Component class="javax.swing.JLabel" name="lblCourseName">
           <Properties>
-            <Property name="text" type="java.lang.String" value="studentCGPA"/>
+            <Property name="text" type="java.lang.String" value="courseName"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
@@ -325,27 +289,15 @@
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblStudentYear">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="studentYear"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblMajor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Major"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblYear">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Year"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblCGPA">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CGPA"/>
+            <Property name="text" type="java.lang.String" value="Course"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
@@ -373,29 +325,6 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="separator2">
     </Component>
-    <Component class="javax.swing.JComboBox" name="cboxStatus">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Draft"/>
-            <StringItem index="1" value="Pending"/>
-            <StringItem index="2" value="Completed"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="cboxStatusAncestorAdded"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-        <Property name="horizontalTextPosition" type="int" value="2"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnUnlockEdit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Unlock Edit"/>
@@ -404,9 +333,25 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnlockEditActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="btnAdd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="+ Add"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRemove">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="- Remove"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblTip">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tip: You can only edit some information directly on the table"/>
+        <Property name="text" type="java.lang.String" value="Tip: You can update the information directly on the table."/>
         <Property name="horizontalTextPosition" type="int" value="2"/>
       </Properties>
     </Component>
